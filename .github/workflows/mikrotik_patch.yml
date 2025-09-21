@@ -110,14 +110,7 @@ jobs:
     
     
         
-    - name: Get mikrotik-${{ env.LATEST_VERSION }}-mmips.npk
-      run: |
-        sudo wget -nv -O routeros-$LATEST_VERSION-mmips.npk https://download.mikrotik.com/routeros/6.49.15/routeros-mmips-6.49.15.npk
-
-    - name: Patch mikrotik-${{ env.LATEST_VERSION }}-mmips.npk
-      run: |
-        sudo -E python3 patch.py npk routeros-$LATEST_VERSION-mmips.npk
-        sudo zip routeros-$LATEST_VERSION-mmips.zip routeros-$LATEST_VERSION-mmips.npk
+    
         
     - name: Delete Release tag ${{ env.LATEST_VERSION }}
       run: |
