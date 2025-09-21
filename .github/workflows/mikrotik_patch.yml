@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'RouterOS version, e.g.: 7.15.1, blank for latest'
+        description: 'RouterOS version, e.g.: 6.49.15, blank for latest'
         type: string
         default: ''
 permissions:
@@ -58,10 +58,10 @@ jobs:
     needs: Create_SquashFS
     strategy:
       matrix:
-        channel: [stable, testing]
+        channel: [stable]
     env:
       TZ: 'Asia/Shanghai'
-      LATEST_VERSION_URL: 'https://upgrade.mikrotik.com/routeros/NEWESTa7.'
+      LATEST_VERSION_URL: 'https://upgrade.mikrotik.com/routeros/NEWESTa6.stable'
       LATEST_VERSION: ""
       CUSTOM_LICENSE_PRIVATE_KEY: ${{ secrets.CUSTOM_LICENSE_PRIVATE_KEY }}
       CUSTOM_LICENSE_PUBLIC_KEY: ${{ secrets.CUSTOM_LICENSE_PUBLIC_KEY }}
@@ -96,7 +96,7 @@ jobs:
 
     - name: Get netinstall-${{ env.LATEST_VERSION }}.zip
       run: |
-        sudo wget -nv -O netinstall-$LATEST_VERSION.zip https://download.mikrotik.com/routeros/$LATEST_VERSION/netinstall-$LATEST_VERSION.zip
+        sudo wget -nv -O netinstall-$LATEST_VERSION.zip https://download.mikrotik.com/routeros/6.49.15/netinstall64-6.49.15.zip
         sudo unzip netinstall-$LATEST_VERSION.zip
         sudo rm netinstall-$LATEST_VERSION.zip
 
@@ -107,7 +107,7 @@ jobs:
 
     - name: Get mikrotik-${{ env.LATEST_VERSION }}.iso
       run: |
-        sudo wget -nv -O mikrotik-$LATEST_VERSION.iso https://download.mikrotik.com/routeros/$LATEST_VERSION/mikrotik-$LATEST_VERSION.iso
+        sudo wget -nv -O mikrotik-$LATEST_VERSION.iso https://download.mikrotik.com/routeros/6.49.15/mikrotik-6.49.15.iso
 
     - name: Patch mikrotik-${{ env.LATEST_VERSION }}.iso
       run: |
@@ -156,8 +156,7 @@ jobs:
 
     - name: Get chr-${{ env.LATEST_VERSION }}.img
       run: |
-        sudo wget -nv -O chr-$LATEST_VERSION.img.zip https://download.mikrotik.com/routeros/$LATEST_VERSION/chr-$LATEST_VERSION.img.zip
-        sudo unzip chr-$LATEST_VERSION.img.zip
+        sudo wget -nv -O chr-$LATEST_VERSION.img.zip https://download.mikrotik.com/routeros/6.49.15/chr-6.49.15.img.zip
         sudo rm chr-$LATEST_VERSION.img.zip
         
     - name: Patch chr-${{ env.LATEST_VERSION }}.img
@@ -201,8 +200,7 @@ jobs:
 
     - name: Get install-image-${{ env.LATEST_VERSION }}.img
       run: |
-        sudo wget -nv -O install-image-$LATEST_VERSION.zip https://download.mikrotik.com/routeros/$LATEST_VERSION/install-image-$LATEST_VERSION.zip
-        sudo unzip install-image-$LATEST_VERSION.zip
+        sudo wget -nv -O install-image-$LATEST_VERSION.zip https://download.mikrotik.com/routeros/6.49.15/install-image-6.49.15.zip
         sudo rm install-image-$LATEST_VERSION.zip
         
     - name: Patch install-image-${{ env.LATEST_VERSION }}.img
@@ -226,7 +224,7 @@ jobs:
         
     - name: Get mikrotik-${{ env.LATEST_VERSION }}-mmips.npk
       run: |
-        sudo wget -nv -O routeros-$LATEST_VERSION-mmips.npk https://download.mikrotik.com/routeros/$LATEST_VERSION/routeros-$LATEST_VERSION-mmips.npk
+        sudo wget -nv -O routeros-$LATEST_VERSION-mmips.npk https://download.mikrotik.com/routeros/6.49.15/routeros-mmips-6.49.15.npk
 
     - name: Patch mikrotik-${{ env.LATEST_VERSION }}-mmips.npk
       run: |
