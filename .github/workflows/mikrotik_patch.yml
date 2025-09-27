@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'RouterOS version, e.g.: 6.49.15, blank for latest'
+        description: 'RouterOS version, e.g.: 6.47.9, blank for latest'
         type: string
         default: ''
 permissions:
@@ -96,7 +96,7 @@ jobs:
 
     - name: Get netinstall-${{ env.LATEST_VERSION }}.zip
       run: |
-        sudo wget -nv -O netinstall-$LATEST_VERSION.zip https://download.mikrotik.com/routeros/6.49.15/netinstall-6.49.15.zip
+        sudo wget -nv -O netinstall-$LATEST_VERSION.zip https://www.mikrotik-software.de/downloads/netinstall-6.47.9.zip
         sudo unzip netinstall-$LATEST_VERSION.zip
         sudo rm netinstall-$LATEST_VERSION.zip
 
